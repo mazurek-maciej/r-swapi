@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import { configureStore } from './store';
+
+import App from './components/App';
+
+import { CssBaseline, ThemeProvider, createMuiTheme } from '@material-ui/core';
+
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark'
+  }
+})
+
+const { store } = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <App />
+      </ThemeProvider>  
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
