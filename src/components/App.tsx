@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { getPeopleAction } from '../store/people/actions';
+import { storePeopleCardsAction } from '../store/peopleCards/actions';
 
 function App() {
   const dispatch = useDispatch();
 
-  const dispatchGetPeople = () => dispatch(getPeopleAction());
+  const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
 
   return (
     <Container>
