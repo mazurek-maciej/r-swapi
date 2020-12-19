@@ -1,8 +1,8 @@
 import { StatusOfAPICall } from "../../../services/StatusOfApiCall";
-import { People } from "../models/People";
+import { Starship } from "../models/Starship";
 
-export interface PeopleState {
+export interface StarshipState {
   status: StatusOfAPICall;
-  data?: People;
+  data?: Starship[];
   error?: string
 }

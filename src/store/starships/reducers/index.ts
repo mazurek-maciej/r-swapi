@@ -1,16 +1,16 @@
 import { handleActions } from "redux-actions";
-
-import { ACTION_TYPE, GetPeopleActionFailurePayload, GetPeopleActionPayload, GetPeopleActionSuccessPayload } from "../actions/types";
 import { StatusOfAPICall } from "../../../services/StatusOfApiCall";
-import { PeopleState } from "./types";
+import { ACTION_TYPE, GetStarshipActionFailurePayload, GetStarshipActionPayload, GetStarshipActionSuccessPayload } from "../actions/types";
+import { StarshipState } from "./types";
 
-const initialState: PeopleState = {
+
+export const initialState: StarshipState = {
   status: StatusOfAPICall.IDLE,
   data: undefined,
   error: undefined
-};
+}
 
-export const peopleReducer = handleActions<PeopleState, GetPeopleActionPayload>({
+export const starshipReducer = handleActions<StarshipState, GetStarshipActionPayload>({
   [ACTION_TYPE.GET_REQUEST]: () => ({
     status: StatusOfAPICall.FETCHING,
     data: undefined,
@@ -18,12 +18,12 @@ export const peopleReducer = handleActions<PeopleState, GetPeopleActionPayload>(
   }),
   [ACTION_TYPE.GET_SUCCESS]: (state, action) => ({
     status: StatusOfAPICall.SUCCESS,
-    data: (action.payload as GetPeopleActionSuccessPayload).data,
+    data: (action.payload as GetStarshipActionSuccessPayload).data.results,
     error: undefined
   }),
   [ACTION_TYPE.GET_FAILURE]: (state, action) => ({
     status: StatusOfAPICall.FAILURE,
     data: undefined,
-    error: (action.payload as GetPeopleActionFailurePayload).detail
+    error: (action.payload as GetStarshipActionFailurePayload).detail
   })
 }, {...initialState})

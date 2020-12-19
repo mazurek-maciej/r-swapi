@@ -18,3 +18,5 @@ export interface GetPeopleActionSuccessPayload extends GetPeopleActionPayload {
 export interface GetPeopleActionFailurePayload extends GetPeopleActionPayload {
   detail: string
 }
+
+export interface GetPeopleActiondMeta {}

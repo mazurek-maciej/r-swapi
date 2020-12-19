@@ -10,6 +10,7 @@ import PlayerCard from './PlayerCard';
 import playerLeftAvatar from '../assets/images/playerOneAvatar.png';
 import playerRightAvatar from '../assets/images/playerTwoAvatar.png';
 import CasinoIcon from '@material-ui/icons/Casino';
+import { getStarshipAction } from '../store/starships/actions';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
   const { leftCard, rightCard } = useSelector((state: RootState) => state.peopleCards)
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
+  const dispatchGetStarship = () => dispatch(getStarshipAction());
 
   return (
     <Container>
@@ -40,7 +42,7 @@ function App() {
           <Button
             variant={'outlined'}
             size={'large'}
-            onClick={dispatchGetPeople}
+            onClick={dispatchGetStarship}
             endIcon={<CasinoIcon/>}
           >ROLL</Button>
         </Grid>

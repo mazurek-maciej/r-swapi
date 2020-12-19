@@ -1,6 +1,7 @@
 import { createAction } from "redux-api-middleware";
 import { URL_PEOPLE } from "../../../services/config";
-import { ACTION_TYPE, GetPeopleActionSuccessPayload } from "./types";
+import { PeopleState } from "../reducers/types";
+import { ACTION_TYPE, GetPeopleActiondMeta, GetPeopleActionPayload, GetPeopleActionSuccessPayload } from "./types";
 
 
 const generateGetPeopleUrl = () => {
@@ -16,20 +17,21 @@ const handleSuccessResponse = async (res: Response): Promise<GetPeopleActionSucc
   return { data };
 } 
 
-export const getPeopleAction = () => createAction({
-  endpoint: generateGetPeopleUrl(),
-  method: 'GET',
-  types: [
-    {
-      type: ACTION_TYPE.GET_REQUEST
-    },
-    {
-      type: ACTION_TYPE.GET_SUCCESS,
-      payload: (action, state, res) => handleSuccessResponse(res)
-    },
-    {
-      type: ACTION_TYPE.GET_FAILURE,
-      payload: (action, state, res) => res.json()
-    }
-  ]
-})
+export const getPeopleAction = () =>
+  createAction<PeopleState, GetPeopleActionPayload, GetPeopleActiondMeta>({
+    endpoint: generateGetPeopleUrl(),
+    method: 'GET',
+    types: [
+      {
+        type: ACTION_TYPE.GET_REQUEST
+      },
+      {
+        type: ACTION_TYPE.GET_SUCCESS,
+        payload: (action, state, res) => handleSuccessResponse(res)
+      },
+      {
+        type: ACTION_TYPE.GET_FAILURE,
+        payload: (action, state, res) => res.json()
+      }
+    ]
+  })
