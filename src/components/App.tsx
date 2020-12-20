@@ -80,7 +80,7 @@ function App() {
         <PlayerCard
             player={rightPlayer}
             avatar={playerRightAvatar}
-            isWinner={leftPlayer.id === winnerId}
+            isWinner={rightPlayer.id === winnerId}
             gameType={gameType}
             status={peopleStatus}
             people={rightPeopleCard}
