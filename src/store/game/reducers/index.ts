@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions";
-import { ACTION_TYPE } from "../actions/types";
+import { GameType } from "../../models/GameType";
+import { ACTION_TYPE, GameActionPayload, GameSwitchGameTypeActionPayload } from "../actions/types";
 import { GameState } from "./types";
 
 export const initialState: GameState = {
@@ -13,10 +14,11 @@ export const initialState: GameState = {
     name: 'Wookie',
     score: 0
   },
+  gameType: GameType.starships,
   winnerId: undefined
 }
 
-export const gameReducer = handleActions<GameState>({
+export const gameReducer = handleActions<GameState, GameActionPayload>({
   [ACTION_TYPE.SCORE_LEFT_PLAYER]: (state) => ({
     ...state,
     leftPlayer: {
@@ -39,5 +41,9 @@ export const gameReducer = handleActions<GameState>({
     ...state,
     winnerId: undefined,
     isDraw: true
+  }),
+  [ACTION_TYPE.SWITCH_GAME_TYPE]: (state, action) => ({
+    ...initialState,
+    gameType: (action.payload as GameSwitchGameTypeActionPayload).type
   })
 }, {...initialState})
