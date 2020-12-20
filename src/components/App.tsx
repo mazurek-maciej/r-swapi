@@ -16,6 +16,7 @@ function App() {
   const dispatch = useDispatch();
 
   const { leftCard, rightCard } = useSelector((state: RootState) => state.peopleCards)
+  const { leftPlayer, rightPlayer } = useSelector((state: RootState) => state.game)
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
   const dispatchGetStarship = () => dispatch(getStarshipAction());
@@ -30,11 +31,11 @@ function App() {
 
         <Grid container justify="center" spacing={3}>
           <Grid item xs={3}>
-            <PlayerCard name={'Dathomirian'} avatar={playerLeftAvatar} people={leftCard} />
+            <PlayerCard player={leftPlayer} avatar={playerLeftAvatar} people={leftCard} />
           </Grid>
 
           <Grid item xs={3}>
-            <PlayerCard name={'Wookie'} avatar={playerRightAvatar} people={rightCard} />
+            <PlayerCard player={rightPlayer} avatar={playerRightAvatar} people={rightCard} />
           </Grid>
         </Grid>
         
@@ -42,7 +43,7 @@ function App() {
           <Button
             variant={'outlined'}
             size={'large'}
-            onClick={dispatchGetStarship}
+            onClick={dispatchGetPeople}
             endIcon={<CasinoIcon/>}
           >ROLL</Button>
         </Grid>

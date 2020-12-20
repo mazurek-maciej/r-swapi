@@ -4,14 +4,15 @@ import { useStyles } from "../../services/styles";
 import { People } from "../../store/people/models/People";
 
 import peopleImg from '../../assets/images/people.jpg'
+import { Player } from "../../store/game/models/Player";
 
 interface Props {
-  name: string;
+  player: Player;
   avatar: string;
   people?: People;
 }
 
-const PlayerCard = ({ name, avatar, people }: Props) => {
+const PlayerCard = ({ player, avatar, people }: Props) => {
   const classes = useStyles();
 
   return (
@@ -20,8 +21,8 @@ const PlayerCard = ({ name, avatar, people }: Props) => {
         avatar={
           <Avatar src={avatar} />
         }
-        title={name}
-        subheader="Score: 0"
+        title={player.name}
+        subheader={`Score: ${player.score}`}
       />
       <CardMedia
         image={peopleImg}
