@@ -13,6 +13,7 @@ import { Button, Container, Grid, Typography } from '@material-ui/core';
 import playerLeftAvatar from '../assets/images/playerOneAvatar.png';
 import playerRightAvatar from '../assets/images/playerTwoAvatar.png';
 import CasinoIcon from '@material-ui/icons/Casino';
+import SelectGameType from './SelectGameType';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function App() {
   const { leftCard: leftPeopleCard, rightCard: rightPeopleCard, error } = useSelector((state: RootState) => state.peopleCards)
   const { leftCard: leftStarshipCard, rightCard: rightStarshipCard, status: starshipStatus } = useSelector((state: RootState) => state.starship)
   const { status: peopleStatus } = useSelector((state: RootState) => state.people)
-  const { leftPlayer, rightPlayer, isDraw, winnerId, gameType } = useSelector((state: RootState) => state.game)
+  const { leftPlayer, rightPlayer, isDraw, winnerId, gameType, userSelectedGameType } = useSelector((state: RootState) => state.game)
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
   const dispatchGetStarship = () => dispatch(getStarshipAction());
@@ -49,6 +50,7 @@ function App() {
       <Button
         variant={'outlined'}
         onClick={handleSwitchGameType}
+        size={'large'}
       >
         Change cards to starships
       </Button>
@@ -56,6 +58,7 @@ function App() {
       <Button
         variant={'outlined'}
         onClick={handleSwitchGameType}
+        size={'large'}
       >
         Change cards to people
       </Button>
@@ -121,33 +124,40 @@ function App() {
   return (
     <Container>
       <Grid container justify="center" spacing={3}>
-
         <Grid item>
           <Typography align="center" variant="h3" component="h1">Gwizdek</Typography>
-          {renderSwitchGameTypeButton()}
+          {userSelectedGameType ? renderSwitchGameTypeButton() : <Typography variant="h5" align="center">Choose cards type</Typography>}
         </Grid>
 
-        <Grid container justify="center" spacing={3}>
-          {renderPeopleCards()}
-          {renderStarshipCards()}
-        </Grid>
-
-        <Grid item xs>
-          <Grid container direction="column" alignItems="center">
-            <Button
-              variant={'outlined'}
-              size={'large'}
-              onClick={handleDispatchGameType}
-              endIcon={<CasinoIcon/>}
-            >ROLL</Button>
-            
-            <Grid item>
-              {isDraw ? <Typography variant="h4">DRAW</Typography> : null}
+        {userSelectedGameType ? (
+          <>
+            <Grid container justify="center" spacing={3}>
+              {renderPeopleCards()}
+              {renderStarshipCards()}
             </Grid>
-            
-            {error ? <Typography variant="subtitle1">{error}</Typography> : null}
-          </Grid>
-        </Grid>
+
+            <Grid item xs>
+              <Grid container direction="column" alignItems="center" spacing={3}>
+                <Grid item>
+                  <Button
+                    variant={'outlined'}
+                    size={'large'}
+                    onClick={handleDispatchGameType}
+                    endIcon={<CasinoIcon/>}
+                  >ROLL</Button>
+                </Grid>
+
+                <Grid item>
+                  {isDraw ? <Typography variant="h4">DRAW</Typography> : null}
+                </Grid>
+                
+                {error ? <Typography variant="subtitle1">{error}</Typography> : null}
+              </Grid>
+            </Grid>
+          </>
+        ) : (
+          <SelectGameType handleChooseGame={dispatchSwitchGameType} />
+        )}
       </Grid>
     </Container>
   );
