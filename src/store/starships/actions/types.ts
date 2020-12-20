@@ -4,7 +4,8 @@ import { Starship } from "../models/Starship";
 export enum ACTION_TYPE {
   GET_REQUEST = 'starship/GET_REQUEST',
   GET_SUCCESS = 'starship/GET_SUCCESS',
-  GET_FAILURE = 'starship/GET_FAILURE'
+  GET_FAILURE = 'starship/GET_FAILURE',
+  CLEAR_STARSHIP_CARDS = 'CLEAR_STARSHIP_CARDS'
 }
 
 export interface GetStarshipAction<State, Payload, Meta> extends RSAAAction<State, Payload, Meta> {}

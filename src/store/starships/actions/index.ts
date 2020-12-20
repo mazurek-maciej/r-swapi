@@ -11,8 +11,8 @@ const handleSuccessResponse = async (res: Response): Promise<GetStarshipActionSu
 } 
 
 export const getStarshipAction = () => {
-  const min = Math.ceil(1);
-  const max = Math.floor(10);
+  const min = Math.ceil(0);
+  const max = Math.floor(9);
   const randomLeftNr = Math.floor(Math.random() * (max - min + 1)) + min;
   const randomRightNr = Math.floor(Math.random() * (max - min + 1)) + min;
   return (dispatch: Dispatch) => {
@@ -54,3 +54,7 @@ export const getStarshipAction = () => {
     }))
   }
 }
+
+export const clearStarshipCardsAction = () => ({
+  type: ACTION_TYPE.CLEAR_STARSHIP_CARDS
+})

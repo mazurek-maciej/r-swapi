@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { StatusOfAPICall } from "../../../services/StatusOfApiCall";
-import { ACTION_TYPE, GetStarshipActionFailurePayload, GetStarshipActionPayload, GetStarshipActionSuccessPayload, StarshipsBothCardsPayload } from "../actions/types";
+import { ACTION_TYPE, GetStarshipActionFailurePayload, GetStarshipActionPayload, StarshipsBothCardsPayload } from "../actions/types";
 import { StarshipState } from "./types";
 
 
@@ -29,5 +29,11 @@ export const starshipReducer = handleActions<StarshipState, GetStarshipActionPay
     leftCard: undefined,
     rightCard: undefined,
     error: (action.payload as GetStarshipActionFailurePayload).detail
+  }),
+  [ACTION_TYPE.CLEAR_STARSHIP_CARDS]: () => ({
+    status: StatusOfAPICall.IDLE,
+    leftCard: undefined,
+    rightCard: undefined,
+    error: undefined
   })
 }, {...initialState})

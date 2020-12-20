@@ -44,3 +44,7 @@ export const storePeopleCardsAction = () =>
       })
     }
   }
+
+export const clearePeopleCardsAction = () => ({
+  type: ACTION_TYPE.CLEAR_PEOPLE_CARDS
+})
