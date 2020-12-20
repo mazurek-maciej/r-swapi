@@ -4,4 +4,5 @@ export interface GameState {
   leftPlayer: Player;
   rightPlayer: Player;
   winnerId?: number; 
+  isDraw?: boolean
 }

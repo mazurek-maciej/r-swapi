@@ -1,4 +1,5 @@
 import { handleActions } from "redux-actions";
+import { ACTION_TYPE } from "../actions/types";
 import { GameState } from "./types";
 
 export const initialState: GameState = {
@@ -16,7 +17,26 @@ export const initialState: GameState = {
 }
 
 export const gameReducer = handleActions<GameState>({
-  'TEST': (state) => ({
-    ...state
+  [ACTION_TYPE.SCORE_LEFT_PLAYER]: (state) => ({
+    ...state,
+    leftPlayer: {
+      ...state.leftPlayer,
+      score: state.leftPlayer.score + 1
+    },
+    winnerId: 1,
+    isDraw: false
+  }),
+  [ACTION_TYPE.SCORE_RIGHT_PLAYER]: (state) => ({
+    ...state,
+    rightPlayer: {
+      ...state.rightPlayer,
+      score: state.rightPlayer.score + 1
+    },
+    winnerId: 2,
+    isDraw: false
+  }),
+  [ACTION_TYPE.GAME_DRAW]: (state) => ({
+    ...state,
+    isDraw: true
   })
 }, {...initialState})
