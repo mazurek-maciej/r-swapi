@@ -7,8 +7,7 @@ import { switchGameType } from '../store/game/actions';
 import { RootState } from '../store/state';
 import { GameType } from '../store/models/GameType';
 
-import PeopleCard from './PeopleCard';
-import StarshipCard from './StarshipCard';
+import PlayerCard from './PlayerCard';
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 
 import playerLeftAvatar from '../assets/images/playerOneAvatar.png';
@@ -67,20 +66,22 @@ function App() {
     return gameType === GameType.people ? (
       <>
         <Grid item xs={3}>
-          <PeopleCard
+          <PlayerCard
             player={leftPlayer}
             avatar={playerLeftAvatar}
             isWinner={leftPlayer.id === winnerId}
+            gameType={gameType}
             status={peopleStatus}
             people={leftPeopleCard}
           />
         </Grid>
 
         <Grid item xs={3}>
-          <PeopleCard
+        <PlayerCard
             player={rightPlayer}
             avatar={playerRightAvatar}
-            isWinner={rightPlayer.id === winnerId}
+            isWinner={leftPlayer.id === winnerId}
+            gameType={gameType}
             status={peopleStatus}
             people={rightPeopleCard}
           />
@@ -93,20 +94,22 @@ function App() {
     return gameType === GameType.starships ? (
       <>
         <Grid item xs={3}>
-          <StarshipCard
+          <PlayerCard
             player={leftPlayer}
             avatar={playerLeftAvatar}
             isWinner={leftPlayer.id === winnerId}
+            gameType={gameType}
             status={starshipStatus}
             starship={leftStarshipCard}
           />
         </Grid>
 
         <Grid item xs={3}>
-          <StarshipCard
+          <PlayerCard
             player={rightPlayer}
             avatar={playerRightAvatar}
             isWinner={rightPlayer.id === winnerId}
+            gameType={gameType}
             status={starshipStatus}
             starship={rightStarshipCard}
           />

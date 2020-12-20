@@ -3,33 +3,44 @@ import { useStyles } from "../../services/styles";
 
 import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid, Typography, CircularProgress } from "@material-ui/core";
 
-import { People } from "../../store/people/models/People";
 import { Player } from "../../store/game/models/Player";
+import { Starship } from "../../store/starships/models/Starship";
 
-import peopleImg from '../../assets/images/people.jpg'
 import { StatusOfAPICall } from "../../services/StatusOfApiCall";
+import { GameType } from "../../store/models/GameType";
+import { People } from "../../store/people/models/People";
 
+import starshipsImg from '../../assets/images/starships.webp'
+import peopleImg from '../../assets/images/people.jpg'
 
 interface Props {
   player: Player;
   avatar: string;
   isWinner: boolean;
   status: StatusOfAPICall;
+  gameType: GameType;
   people?: People;
+  starship?: Starship;
 }
 
-const PeopleCard = ({ player, avatar, isWinner, status, people }: Props) => {
+const PlayerCard = ({ player, avatar, isWinner, status, gameType, people, starship }: Props) => {
   const classes = useStyles();
+  const cardImage = gameType === GameType.people ? peopleImg : starshipsImg
 
-  const renderPeopleContent = () => (
-    people ? (
+  const renderContent = () => {
+    return gameType === GameType.people ? (
       <>
-        <Typography variant="h5">{people.name}</Typography>
-        <Typography variant="h4">Mass: {people.mass}</Typography>
+        <Typography variant="h5">{people?.name}</Typography>
+        <Typography variant="h4">Mass: {people?.mass}</Typography>
       </>
-    ) : <Typography>No data from subspace transceiver</Typography>
-  )
-
+    ) : (
+      <>
+        <Typography variant="h5">{starship?.name}</Typography>
+        <Typography variant="h4">Crew: {starship?.crew}</Typography>
+      </>
+    )
+  }
+    
   return (
     <Card className={isWinner ? classes.winCard : ''}>
       <CardHeader
@@ -40,7 +51,7 @@ const PeopleCard = ({ player, avatar, isWinner, status, people }: Props) => {
         subheader={`Score: ${player.score}`}
       />
       <CardMedia
-        image={peopleImg}
+        image={cardImage}
         className={classes.media}
       > 
         {isWinner ? (
@@ -57,10 +68,10 @@ const PeopleCard = ({ player, avatar, isWinner, status, people }: Props) => {
         ) : null}
       </CardMedia>
       <CardContent>
-        {status === StatusOfAPICall.FETCHING ? <CircularProgress/> : renderPeopleContent()}
+        {status === StatusOfAPICall.FETCHING ? <CircularProgress/> : renderContent()}
       </CardContent>
     </Card>
   )
-}
+};
 
-export default PeopleCard;
+export default PlayerCard;
