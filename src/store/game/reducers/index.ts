@@ -15,6 +15,7 @@ export const initialState: GameState = {
     score: 0
   },
   gameType: GameType.starships,
+  userSelectedGameType: false,
   winnerId: undefined
 }
 
@@ -44,6 +45,7 @@ export const gameReducer = handleActions<GameState, GameActionPayload>({
   }),
   [ACTION_TYPE.SWITCH_GAME_TYPE]: (state, action) => ({
     ...initialState,
+    userSelectedGameType: true,
     gameType: (action.payload as GameSwitchGameTypeActionPayload).type
   })
 }, {...initialState})
