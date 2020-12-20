@@ -15,8 +15,8 @@ import { getStarshipAction } from '../store/starships/actions';
 function App() {
   const dispatch = useDispatch();
 
-  const { leftCard, rightCard } = useSelector((state: RootState) => state.peopleCards)
-  const { leftPlayer, rightPlayer } = useSelector((state: RootState) => state.game)
+  const { leftCard, rightCard, error } = useSelector((state: RootState) => state.peopleCards)
+  const { leftPlayer, rightPlayer, isDraw, winnerId } = useSelector((state: RootState) => state.game)
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
   const dispatchGetStarship = () => dispatch(getStarshipAction());
@@ -31,23 +31,38 @@ function App() {
 
         <Grid container justify="center" spacing={3}>
           <Grid item xs={3}>
-            <PlayerCard player={leftPlayer} avatar={playerLeftAvatar} people={leftCard} />
+            <PlayerCard
+              player={leftPlayer}
+              avatar={playerLeftAvatar}
+              isWinner={leftPlayer.id === winnerId}
+              people={leftCard} />
+          </Grid>
+
+          <Grid item>
+            {isDraw ? <Typography variant="h4">DRAW</Typography> : null}
           </Grid>
 
           <Grid item xs={3}>
-            <PlayerCard player={rightPlayer} avatar={playerRightAvatar} people={rightCard} />
+            <PlayerCard
+              player={rightPlayer}
+              avatar={playerRightAvatar}
+              isWinner={rightPlayer.id === winnerId}
+              people={rightCard} />
           </Grid>
-        </Grid>
-        
-        <Grid item>
-          <Button
-            variant={'outlined'}
-            size={'large'}
-            onClick={dispatchGetPeople}
-            endIcon={<CasinoIcon/>}
-          >ROLL</Button>
+
         </Grid>
 
+        <Grid item xs>
+          <Grid container direction="column" alignItems="center">
+            <Button
+              variant={'outlined'}
+              size={'large'}
+              onClick={dispatchGetPeople}
+              endIcon={<CasinoIcon/>}
+            >ROLL</Button>
+            {error ? <Typography variant="subtitle1">{error}</Typography> : null}
+          </Grid>
+        </Grid>
       </Grid>
     </Container>
   );

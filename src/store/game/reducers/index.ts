@@ -37,6 +37,7 @@ export const gameReducer = handleActions<GameState>({
   }),
   [ACTION_TYPE.GAME_DRAW]: (state) => ({
     ...state,
+    winnerId: undefined,
     isDraw: true
   })
 }, {...initialState})
