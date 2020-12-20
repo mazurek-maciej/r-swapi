@@ -4,17 +4,22 @@ import { useStyles } from "../../services/styles";
 import { People } from "../../store/people/models/People";
 
 import peopleImg from '../../assets/images/people.jpg'
+import starshipsImg from '../../assets/images/starships.webp'
 import { Player } from "../../store/game/models/Player";
+import { GameType } from "../../store/models/GameType";
 
 interface Props {
   player: Player;
   avatar: string;
   isWinner: boolean;
+  gameType: GameType;
   people?: People;
 }
 
-const PlayerCard = ({ player, avatar, isWinner, people }: Props) => {
+const PlayerCard = ({ player, avatar, isWinner, gameType, people }: Props) => {
   const classes = useStyles();
+
+  const cardImage = gameType === GameType.people ? peopleImg : starshipsImg;
 
   return (
     <Card className={isWinner ? classes.winCard : ''}>
@@ -26,7 +31,7 @@ const PlayerCard = ({ player, avatar, isWinner, people }: Props) => {
         subheader={`Score: ${player.score}`}
       />
       <CardMedia
-        image={peopleImg}
+        image={cardImage}
         className={classes.media}
       > 
         {isWinner ? (
