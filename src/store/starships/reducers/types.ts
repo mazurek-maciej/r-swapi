@@ -3,6 +3,7 @@ import { Starship } from "../models/Starship";
 
 export interface StarshipState {
   status: StatusOfAPICall;
-  data?: Starship[];
+  leftCard?: Starship;
+  rightCard?: Starship;
   error?: string
 }

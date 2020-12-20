@@ -24,4 +24,9 @@ export interface GetStarshipActionFailurePayload extends GetStarshipActionPayloa
   detail: string
 }
 
+export interface StarshipsBothCardsPayload extends GetStarshipActionPayload {
+  leftCard: Starship;
+  rightCard: Starship
+}
+
 export interface GetStarshipActiondMeta {}
