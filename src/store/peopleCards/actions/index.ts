@@ -14,12 +14,14 @@ export const storePeopleCardsAction = () =>
       const leftCardMass = parseInt((leftCard.payload as GetPeopleActionSuccessPayload).data.mass)
       const rightCardMass = parseInt((rightCard.payload as GetPeopleActionSuccessPayload).data.mass)
       
-      if (isNaN(leftCardMass)) {
+      if (isNaN(leftCardMass) && isNaN(rightCardMass)) {
+        dispatch({ type: GAME_ACTION_TYPE.GAME_DRAW })
+      } else if (leftCardMass === rightCardMass) {
+        dispatch({ type: GAME_ACTION_TYPE.GAME_DRAW })
+      } else if (isNaN(leftCardMass)) {
         dispatch({ type: GAME_ACTION_TYPE.SCORE_RIGHT_PLAYER })
       } else if (isNaN(rightCardMass)) {
         dispatch({ type: GAME_ACTION_TYPE.SCORE_LEFT_PLAYER })
-      } else if (isNaN(leftCardMass) && isNaN(rightCardMass)) {
-        dispatch({ type: GAME_ACTION_TYPE.GAME_DRAW })
       } else {
         const hasLeftCardBiggerMass = leftCardMass > rightCardMass;
       

@@ -21,6 +21,6 @@ export const peopleCardsReducer = handleActions<PeopleCardsState>({
   }),
   [ACTION_TYPE.STORE_ERROR_PEOPLE_CARDS]: (state, action) => ({
     ...state,
-    error: "We had some trouble to connect with space galactic. Please try again"
+    error: "We had some trouble to connect with space galactic. Roll again"
   })
 }, {...initialState})
