@@ -1,25 +1,34 @@
 import React from "react";
-import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid, Typography } from "@material-ui/core";
 import { useStyles } from "../../services/styles";
+
+import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid, Typography, CircularProgress } from "@material-ui/core";
+
 import { People } from "../../store/people/models/People";
+import { Player } from "../../store/game/models/Player";
 
 import peopleImg from '../../assets/images/people.jpg'
-import starshipsImg from '../../assets/images/starships.webp'
-import { Player } from "../../store/game/models/Player";
-import { GameType } from "../../store/models/GameType";
+import { StatusOfAPICall } from "../../services/StatusOfApiCall";
+
 
 interface Props {
   player: Player;
   avatar: string;
   isWinner: boolean;
-  gameType: GameType;
+  status: StatusOfAPICall;
   people?: People;
 }
 
-const PlayerCard = ({ player, avatar, isWinner, gameType, people }: Props) => {
+const PeopleCard = ({ player, avatar, isWinner, status, people }: Props) => {
   const classes = useStyles();
 
-  const cardImage = gameType === GameType.people ? peopleImg : starshipsImg;
+  const renderPeopleContent = () => (
+    people ? (
+      <>
+        <Typography variant="h5">{people.name}</Typography>
+        <Typography variant="h4">Mass: {people.mass}</Typography>
+      </>
+    ) : <Typography>No data from subspace transceiver</Typography>
+  )
 
   return (
     <Card className={isWinner ? classes.winCard : ''}>
@@ -31,7 +40,7 @@ const PlayerCard = ({ player, avatar, isWinner, gameType, people }: Props) => {
         subheader={`Score: ${player.score}`}
       />
       <CardMedia
-        image={cardImage}
+        image={peopleImg}
         className={classes.media}
       > 
         {isWinner ? (
@@ -48,11 +57,10 @@ const PlayerCard = ({ player, avatar, isWinner, gameType, people }: Props) => {
         ) : null}
       </CardMedia>
       <CardContent>
-        <Typography variant="h5">{people?.name}</Typography>
-        {people ? <Typography variant="h4">Mass: {people?.mass}</Typography> : null}
+        {status === StatusOfAPICall.FETCHING ? <CircularProgress/> : renderPeopleContent()}
       </CardContent>
     </Card>
   )
 }
 
-export default PlayerCard;
+export default PeopleCard;
