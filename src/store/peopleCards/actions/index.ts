@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import { getPeopleAction } from "../../people/actions";
 import { GetPeopleActionSuccessPayload } from "../../people/actions/types";
 import { RootState } from "../../state";
-import { ACTION_TYPE, PeopleCardsAction, PeopleCardsStoreLeftCardActionPayload, PeopleCardsStoreRightCardActionPayload } from "./types";
+import { ACTION_TYPE, PeopleCardsAction, PeopleCardsStoreCardsActionPayload } from "./types";
 import { ACTION_TYPE as GAME_ACTION_TYPE } from '../../game/actions/types';
 
 export const storePeopleCardsAction = () =>
@@ -29,14 +29,12 @@ export const storePeopleCardsAction = () =>
       }
 
       dispatch({
-        type: ACTION_TYPE.STORE_LEFT_PEOPLE_CARDS,
-        payload: { leftCard: (leftCard.payload as GetPeopleActionSuccessPayload).data }
-      }) as PeopleCardsAction<PeopleCardsStoreLeftCardActionPayload>;
-
-      dispatch({
-        type: ACTION_TYPE.STORE_RIGHT_PEOPLE_CARDS,
-        payload: { rightCard: (rightCard.payload as GetPeopleActionSuccessPayload).data }
-      }) as PeopleCardsAction<PeopleCardsStoreRightCardActionPayload>
+        type: ACTION_TYPE.STORE_PEOPLE_CARDS,
+        payload: {
+          leftCard: (leftCard.payload as GetPeopleActionSuccessPayload).data,
+          rightCard: (rightCard.payload as GetPeopleActionSuccessPayload).data
+        }
+      }) as PeopleCardsAction<PeopleCardsStoreCardsActionPayload>
 
     } else {
       dispatch({

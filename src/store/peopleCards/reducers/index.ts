@@ -1,5 +1,5 @@
 import { handleActions } from "redux-actions";
-import { ACTION_TYPE, PeopleCardsStoreLeftCardActionPayload, PeopleCardsStoreRightCardActionPayload } from "../actions/types";
+import { ACTION_TYPE, PeopleCardsStoreCardsActionPayload } from "../actions/types";
 import { PeopleCardsState } from "./types";
 
 export const initialState: PeopleCardsState = {
@@ -9,14 +9,9 @@ export const initialState: PeopleCardsState = {
 } 
 
 export const peopleCardsReducer = handleActions<PeopleCardsState>({
-  [ACTION_TYPE.STORE_LEFT_PEOPLE_CARDS]: (state, action) => ({
-    ...state,
-    leftCard: (action.payload as PeopleCardsStoreLeftCardActionPayload).leftCard,
-    error: undefined
-  }),
-  [ACTION_TYPE.STORE_RIGHT_PEOPLE_CARDS]: (state, action) => ({
-    ...state,
-    rightCard: (action.payload as PeopleCardsStoreRightCardActionPayload).rightCard,
+  [ACTION_TYPE.STORE_PEOPLE_CARDS]: (state, action) => ({
+    leftCard: (action.payload as PeopleCardsStoreCardsActionPayload).leftCard,
+    rightCard: (action.payload as PeopleCardsStoreCardsActionPayload).rightCard,
     error: undefined
   }),
   [ACTION_TYPE.STORE_ERROR_PEOPLE_CARDS]: (state, action) => ({
