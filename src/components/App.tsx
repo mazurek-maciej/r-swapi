@@ -1,40 +1,25 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearePeopleCardsAction, storePeopleCardsAction } from '../store/peopleCards/actions';
-import { clearStarshipCardsAction, getStarshipAction } from '../store/starships/actions';
+import { clearePeopleCardsAction } from '../store/peopleCards/actions';
+import { clearStarshipCardsAction } from '../store/starships/actions';
 import { switchGameType } from '../store/game/actions';
 
 import { RootState } from '../store/state';
 import { GameType } from '../store/models/GameType';
 
-import PlayerCard from './PlayerCard';
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 
-import playerLeftAvatar from '../assets/images/playerOneAvatar.png';
-import playerRightAvatar from '../assets/images/playerTwoAvatar.png';
-import CasinoIcon from '@material-ui/icons/Casino';
 import SelectGameType from './SelectGameType';
+import GameContainer from './GameContainer';
 
 function App() {
   const dispatch = useDispatch();
 
-  const { leftCard: leftPeopleCard, rightCard: rightPeopleCard, error } = useSelector((state: RootState) => state.peopleCards)
-  const { leftCard: leftStarshipCard, rightCard: rightStarshipCard, status: starshipStatus } = useSelector((state: RootState) => state.starship)
-  const { status: peopleStatus } = useSelector((state: RootState) => state.people)
-  const { leftPlayer, rightPlayer, isDraw, winnerId, gameType, userSelectedGameType } = useSelector((state: RootState) => state.game)
+  const { gameType, userSelectedGameType } = useSelector((state: RootState) => state.game)
 
-  const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
-  const dispatchGetStarship = () => dispatch(getStarshipAction());
+  const dispatchSwitchGameType = (type: GameType) => dispatch(switchGameType(type));
   const dispatchClearPeopleCards = () => dispatch(clearePeopleCardsAction());
   const dispatchClearStarshipCards = () => dispatch(clearStarshipCardsAction());
-  const dispatchSwitchGameType = (type: GameType) => dispatch(switchGameType(type));
-
-  const handleDispatchGameType = () => {
-    if (gameType === GameType.people) {
-      return dispatchGetPeople()
-    }
-    return dispatchGetStarship()
-  }
 
   const handleSwitchGameType = () => {
     if (gameType === GameType.people) {
@@ -45,80 +30,18 @@ function App() {
     return dispatchClearPeopleCards()
   }
 
-  const renderSwitchGameTypeButton = () => {
-    return gameType === GameType.people ? (
+  const renderChooseCardsType = () => {
+    const btnText = gameType === GameType.people ? 'Change cards to starships' : 'Change cards to people'
+
+    return userSelectedGameType ? 
       <Button
         variant={'outlined'}
         onClick={handleSwitchGameType}
         size={'large'}
       >
-        Change cards to starships
-      </Button>
-    ) : (
-      <Button
-        variant={'outlined'}
-        onClick={handleSwitchGameType}
-        size={'large'}
-      >
-        Change cards to people
-      </Button>
-    )
-  }
-
-  const renderPeopleCards = () => {
-    return gameType === GameType.people ? (
-      <>
-        <Grid item xs={3}>
-          <PlayerCard
-            player={leftPlayer}
-            avatar={playerLeftAvatar}
-            isWinner={leftPlayer.id === winnerId}
-            gameType={gameType}
-            status={peopleStatus}
-            people={leftPeopleCard}
-          />
-        </Grid>
-
-        <Grid item xs={3}>
-        <PlayerCard
-            player={rightPlayer}
-            avatar={playerRightAvatar}
-            isWinner={rightPlayer.id === winnerId}
-            gameType={gameType}
-            status={peopleStatus}
-            people={rightPeopleCard}
-          />
-        </Grid>
-      </>
-    ) : null
-  }
-
-  const renderStarshipCards = () => {
-    return gameType === GameType.starships ? (
-      <>
-        <Grid item xs={3}>
-          <PlayerCard
-            player={leftPlayer}
-            avatar={playerLeftAvatar}
-            isWinner={leftPlayer.id === winnerId}
-            gameType={gameType}
-            status={starshipStatus}
-            starship={leftStarshipCard}
-          />
-        </Grid>
-
-        <Grid item xs={3}>
-          <PlayerCard
-            player={rightPlayer}
-            avatar={playerRightAvatar}
-            isWinner={rightPlayer.id === winnerId}
-            gameType={gameType}
-            status={starshipStatus}
-            starship={rightStarshipCard}
-          />
-        </Grid>
-      </>
-    ) : null
+        {btnText}
+      </Button> :
+      <Typography variant="h5" align="center">Choose cards type</Typography>
   }
 
   return (
@@ -126,36 +49,14 @@ function App() {
       <Grid container justify="center" spacing={3}>
         <Grid item>
           <Typography align="center" variant="h3" component="h1">Gwizdek</Typography>
-          {userSelectedGameType ? renderSwitchGameTypeButton() : <Typography variant="h5" align="center">Choose cards type</Typography>}
+          {renderChooseCardsType()}
         </Grid>
 
-        {userSelectedGameType ? (
-          <>
-            <Grid container justify="center" spacing={3}>
-              {renderPeopleCards()}
-              {renderStarshipCards()}
-            </Grid>
-
-            <Grid item xs>
-              <Grid container direction="column" alignItems="center" spacing={3}>
-                <Grid item>
-                  <Button
-                    variant={'outlined'}
-                    size={'large'}
-                    onClick={handleDispatchGameType}
-                    endIcon={<CasinoIcon/>}
-                  >ROLL</Button>
-                </Grid>
-
-                <Grid item>
-                  {isDraw ? <Typography variant="h4">DRAW</Typography> : null}
-                </Grid>
-                
-                {error ? <Typography variant="subtitle1">{error}</Typography> : null}
-              </Grid>
-            </Grid>
-          </>
-        ) : (
+        {userSelectedGameType ?
+        (
+          <GameContainer />
+        ) :
+        (
           <SelectGameType handleChooseGame={dispatchSwitchGameType} />
         )}
       </Grid>
