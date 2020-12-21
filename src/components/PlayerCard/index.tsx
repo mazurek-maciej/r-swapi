@@ -29,15 +29,19 @@ const PlayerCard = ({ player, avatar, isWinner, status, gameType, people, starsh
 
   const renderContent = () => {
     return gameType === GameType.people ? (
-      <>
-        <Typography variant="h5">{people?.name}</Typography>
-        <Typography variant="h4">Mass: {people?.mass}</Typography>
-      </>
+      people ? (
+        <>
+          <Typography variant="h5">{people.name}</Typography>
+          <Typography variant="h4">Mass: {people.mass}</Typography>
+        </>
+      ) : <Typography>Cannot recieve information from space command</Typography>
     ) : (
-      <>
-        <Typography variant="h5">{starship?.name}</Typography>
-        <Typography variant="h4">Crew: {starship?.crew}</Typography>
-      </>
+      starship ? ( 
+        <>
+          <Typography variant="h5">{starship?.name}</Typography>
+          <Typography variant="h4">Crew: {starship?.crew}</Typography>
+        </>
+      ) : <Typography>Cannot recieve information from space command</Typography>
     )
   }
     
