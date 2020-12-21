@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 
 import { ACTION_TYPE, GetPeopleActionFailurePayload, GetPeopleActionPayload, GetPeopleActionSuccessPayload } from "../actions/types";
-import { StatusOfAPICall } from "../../../services/StatusOfApiCall";
+import { StatusOfAPICall } from "../../game/models/StatusOfApiCall";
 import { PeopleState } from "./types";
 
 const initialState: PeopleState = {

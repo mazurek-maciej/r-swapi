@@ -1,5 +1,5 @@
 import { handleActions } from "redux-actions";
-import { StatusOfAPICall } from "../../../services/StatusOfApiCall";
+import { StatusOfAPICall } from "../../game/models/StatusOfApiCall";
 import { ACTION_TYPE, GetStarshipActionFailurePayload, GetStarshipActionPayload, StarshipsBothCardsPayload } from "../actions/types";
 import { StarshipState } from "./types";
 

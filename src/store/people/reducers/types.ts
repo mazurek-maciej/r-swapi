@@ -1,4 +1,4 @@
-import { StatusOfAPICall } from "../../../services/StatusOfApiCall";
+import { StatusOfAPICall } from "../../game/models/StatusOfApiCall";
 import { People } from "../models/People";
 
 export interface PeopleState {

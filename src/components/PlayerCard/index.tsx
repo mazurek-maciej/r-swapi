@@ -6,7 +6,7 @@ import { Avatar, Card, CardContent, CardHeader, CardMedia, Grid, Typography, Cir
 import { Player } from "../../store/game/models/Player";
 import { Starship } from "../../store/starships/models/Starship";
 
-import { StatusOfAPICall } from "../../services/StatusOfApiCall";
+import { StatusOfAPICall } from "../../store/game/models/StatusOfApiCall";
 import { GameType } from "../../store/models/GameType";
 import { People } from "../../store/people/models/People";
 

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { createAction } from "redux-api-middleware";
-import { URL_STARSHIPS } from "../../../services/config";
+import { URL_STARSHIPS } from "../../../constants/config";
 import { StarshipState } from "../reducers/types";
 import { ACTION_TYPE, GetStarshipActiondMeta, GetStarshipActionPayload, GetStarshipActionSuccessPayload } from "./types";
 import { ACTION_TYPE as GAME_ACTION_TYPE } from '../../game/actions/types';
