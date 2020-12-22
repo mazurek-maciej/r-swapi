@@ -27,7 +27,7 @@ const PlayerCard = ({ player, avatar, isWinner, status, gameType, people, starsh
   const classes = useStyles();
   const cardImage = gameType === GameType.people ? peopleImg : starshipsImg
 
-  const renderContent = () => {
+  const renderCardContent = () => {
     return gameType === GameType.people ? (
       people ? (
         <>
@@ -72,7 +72,7 @@ const PlayerCard = ({ player, avatar, isWinner, status, gameType, people, starsh
         ) : null}
       </CardMedia>
       <CardContent>
-        {status === StatusOfAPICall.FETCHING ? <CircularProgress/> : renderContent()}
+        {status === StatusOfAPICall.FETCHING ? <CircularProgress/> : renderCardContent()}
       </CardContent>
     </Card>
   )

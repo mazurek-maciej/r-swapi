@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { storePeopleCardsAction } from "../../store/peopleCards/actions"
-import { getStarshipAction } from "../../store/starships/actions"
+import { storeStarshipsCards } from "../../store/starshipsCards/actions"
 
 import { GameType } from "../../store/models/GameType"
 import { RootState } from "../../store/state"
@@ -19,12 +19,12 @@ const GameContainer = () => {
   const dispatch = useDispatch();
 
   const { leftCard: leftPeopleCard, rightCard: rightPeopleCard, error } = useSelector((state: RootState) => state.peopleCards)
-  const { leftCard: leftStarshipCard, rightCard: rightStarshipCard, status: starshipStatus } = useSelector((state: RootState) => state.starship)
+  const { leftCard: leftStarshipCard, rightCard: rightStarshipCard } = useSelector((state: RootState) => state.starshipsCards)
   const { leftPlayer, rightPlayer, isDraw, winnerId, gameType } = useSelector((state: RootState) => state.game)
-  const { status: peopleStatus } = useSelector((state: RootState) => state.people)
+  const { peopleStatus, starshipsStatus } = useSelector((state: RootState) => ({ peopleStatus: state.people.status, starshipsStatus: state.starships.status}))
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
-  const dispatchGetStarship = () => dispatch(getStarshipAction());
+  const dispatchGetStarship = () => dispatch(storeStarshipsCards());
 
   const handleDispatchGameType = () => {
     !hasStartedGame && setHasStartedGame(true);
@@ -72,7 +72,7 @@ const GameContainer = () => {
             avatar={playerLeftAvatar}
             isWinner={leftPlayer.id === winnerId}
             gameType={gameType}
-            status={starshipStatus}
+            status={starshipsStatus}
             starship={leftStarshipCard}
           />
         </Grid>
@@ -83,7 +83,7 @@ const GameContainer = () => {
             avatar={playerRightAvatar}
             isWinner={rightPlayer.id === winnerId}
             gameType={gameType}
-            status={starshipStatus}
+            status={starshipsStatus}
             starship={rightStarshipCard}
           />
         </Grid>

@@ -1,9 +1,8 @@
 import { StatusOfAPICall } from "../../game/models/StatusOfApiCall";
 import { Starship } from "../models/Starship";
 
-export interface StarshipState {
+export interface StarshipsState {
   status: StatusOfAPICall;
-  leftCard?: Starship;
-  rightCard?: Starship;
+  data?: Starship[];
   error?: string
 }

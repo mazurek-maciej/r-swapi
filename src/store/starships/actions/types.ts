@@ -5,14 +5,14 @@ export enum ACTION_TYPE {
   GET_REQUEST = 'starship/GET_REQUEST',
   GET_SUCCESS = 'starship/GET_SUCCESS',
   GET_FAILURE = 'starship/GET_FAILURE',
-  CLEAR_STARSHIP_CARDS = 'CLEAR_STARSHIP_CARDS'
+  CLEAR_STARSHIPS_CARDS = 'CLEAR_STARSHIPS_CARDS'
 }
 
-export interface GetStarshipAction<State, Payload, Meta> extends RSAAAction<State, Payload, Meta> {}
+export interface GetStarshipsAction<State, Payload, Meta> extends RSAAAction<State, Payload, Meta> {}
 
-export interface GetStarshipActionPayload {}
+export interface GetStarshipsActionPayload {}
 
-export interface GetStarshipActionSuccessPayload extends GetStarshipActionPayload {
+export interface GetStarshipsActionSuccessPayload extends GetStarshipsActionPayload {
   data: {
     count: number;
     next: string | null;
@@ -21,13 +21,8 @@ export interface GetStarshipActionSuccessPayload extends GetStarshipActionPayloa
   }
 }
 
-export interface GetStarshipActionFailurePayload extends GetStarshipActionPayload {
+export interface GetStarshipsActionFailurePayload extends GetStarshipsActionPayload {
   detail: string
 }
 
-export interface StarshipsBothCardsPayload extends GetStarshipActionPayload {
-  leftCard: Starship;
-  rightCard: Starship
-}
-
-export interface GetStarshipActiondMeta {}
+export interface GetStarshipsActiondMeta {}

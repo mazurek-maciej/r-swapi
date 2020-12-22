@@ -1,36 +1,32 @@
 import { handleActions } from "redux-actions";
 import { StatusOfAPICall } from "../../game/models/StatusOfApiCall";
-import { ACTION_TYPE, GetStarshipActionFailurePayload, GetStarshipActionPayload, StarshipsBothCardsPayload } from "../actions/types";
-import { StarshipState } from "./types";
+import { ACTION_TYPE, GetStarshipsActionFailurePayload, GetStarshipsActionPayload, GetStarshipsActionSuccessPayload } from "../actions/types";
+import { StarshipsState } from "./types";
 
 
-export const initialState: StarshipState = {
+export const initialState: StarshipsState = {
   status: StatusOfAPICall.IDLE,
-  leftCard: undefined,
-  rightCard: undefined,
+  data: undefined,
   error: undefined
 }
 
-export const starshipReducer = handleActions<StarshipState, GetStarshipActionPayload>({
+export const starshipsReducer = handleActions<StarshipsState, GetStarshipsActionPayload>({
   [ACTION_TYPE.GET_REQUEST]: () => ({
     status: StatusOfAPICall.FETCHING,
-    leftCard: undefined,
-    rightCard: undefined,
+    data: undefined,
     error: undefined
   }),
   [ACTION_TYPE.GET_SUCCESS]: (state, action) => ({
     status: StatusOfAPICall.SUCCESS,
-    leftCard: (action.payload as StarshipsBothCardsPayload).leftCard,
-    rightCard: (action.payload as StarshipsBothCardsPayload).rightCard,
+    data: (action.payload as GetStarshipsActionSuccessPayload).data.results,
     error: undefined
   }),
   [ACTION_TYPE.GET_FAILURE]: (state, action) => ({
     status: StatusOfAPICall.FAILURE,
-    leftCard: undefined,
-    rightCard: undefined,
-    error: (action.payload as GetStarshipActionFailurePayload).detail
+    data: undefined,
+    error: (action.payload as GetStarshipsActionFailurePayload).detail
   }),
-  [ACTION_TYPE.CLEAR_STARSHIP_CARDS]: () => ({
+  [ACTION_TYPE.CLEAR_STARSHIPS_CARDS]: () => ({
     status: StatusOfAPICall.IDLE,
     leftCard: undefined,
     rightCard: undefined,
