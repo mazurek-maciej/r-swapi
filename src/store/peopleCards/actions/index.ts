@@ -8,9 +8,9 @@ export const storePeopleCardsAction = () =>
   (dispatch: Dispatch) => Promise.all([
     dispatch(getPeopleAction()),
     dispatch(getPeopleAction())
-  ]).then(data => {
-    const leftCard = data[0]
-    const rightCard = data[1];
+  ]).then(people => {
+    const leftCard = people[0]
+    const rightCard = people[1];
 
     const leftCardMass = parseInt((leftCard.payload as GetPeopleActionSuccessPayload).data.mass)
     const rightCardMass = parseInt((rightCard.payload as GetPeopleActionSuccessPayload).data.mass)
