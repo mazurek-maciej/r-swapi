@@ -48,9 +48,5 @@ export const storePeopleCardsAction = () =>
 
   }).catch((err) => {
     dispatch({ type: ACTION_TYPE.STORE_ERROR_PEOPLE_CARDS })
-    throw new Error(err)
+    console.log(err)
   })
-
-export const clearePeopleCardsAction = () => ({
-  type: ACTION_TYPE.CLEAR_PEOPLE_CARDS
-})
