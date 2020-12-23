@@ -26,7 +26,7 @@ export const gameReducer = handleActions<GameState, GameActionPayload>({
       ...state.leftPlayer,
       score: state.leftPlayer.score + 1
     },
-    winnerId: 1,
+    winnerId: state.leftPlayer.id,
     isDraw: false
   }),
   [ACTION_TYPE.SCORE_RIGHT_PLAYER]: (state) => ({
@@ -35,7 +35,7 @@ export const gameReducer = handleActions<GameState, GameActionPayload>({
       ...state.rightPlayer,
       score: state.rightPlayer.score + 1
     },
-    winnerId: 2,
+    winnerId: state.rightPlayer.id,
     isDraw: false
   }),
   [ACTION_TYPE.GAME_DRAW]: (state) => ({
