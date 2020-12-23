@@ -3,17 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearePeopleCardsAction } from '../store/peopleCards/actions';
 import { clearStarshipCardsAction } from '../store/starships/actions';
 import { switchGameType } from '../store/game/actions';
+import { useStyles } from '../services/styles';
 
 import { RootState } from '../store/state';
 import { GameType } from '../store/models/GameType';
 
-import { Button, Container, Grid, Typography } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 import SelectGameType from './SelectGameType';
 import GameContainer from './GameContainer';
+import Header from './Header';
 
 function App() {
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const { gameType, userSelectedGameType } = useSelector((state: RootState) => state.game)
 
@@ -30,37 +33,21 @@ function App() {
     return dispatchClearPeopleCards()
   }
 
-  const renderChooseCardsType = () => {
-    const btnText = gameType === GameType.people ? 'Change cards to starships' : 'Change cards to people'
-
-    return userSelectedGameType ? 
-      <Button
-        variant={'outlined'}
-        onClick={handleSwitchGameType}
-        size={'large'}
-      >
-        {btnText}
-      </Button> :
-      <Typography variant="h5" align="center">Choose cards type</Typography>
-  }
-
   return (
-    <Container>
-      <Grid container justify="center" spacing={3}>
-        <Grid item>
-          <Typography align="center" variant="h3" component="h1">Gwizdek</Typography>
-          {renderChooseCardsType()}
+    <>
+      <Header gameType={gameType} userSelectedGameType={userSelectedGameType} handleOnClick={handleSwitchGameType} />
+      <Container maxWidth="lg" component="main" className={classes.mainContainer}>
+        <Grid container justify="center" spacing={3}>
+          {userSelectedGameType ?
+          (
+            <GameContainer />
+          ) :
+          (
+            <SelectGameType handleChooseGame={dispatchSwitchGameType} />
+          )}
         </Grid>
-
-        {userSelectedGameType ?
-        (
-          <GameContainer />
-        ) :
-        (
-          <SelectGameType handleChooseGame={dispatchSwitchGameType} />
-        )}
-      </Grid>
-    </Container>
+      </Container>
+    </>
   );
 }
 
