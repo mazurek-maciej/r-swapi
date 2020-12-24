@@ -50,3 +50,7 @@ export const storePeopleCardsAction = () =>
     dispatch({ type: ACTION_TYPE.STORE_ERROR_PEOPLE_CARDS })
     console.log(err)
   })
+
+export const clearPeopleCardsAction = () => ({
+  type: ACTION_TYPE.CLEAR_PEOPLE_CARDS
+})

@@ -36,5 +36,5 @@ export const storeStarshipsCards = () =>
 
   }).catch(err => {
     dispatch({ type: ACTION_TYPE.STORE_ERROR_STARSHIPS_CARDS })
-    throw new Error(err)
+    console.log(err)
   })
