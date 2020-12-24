@@ -38,3 +38,7 @@ export const storeStarshipsCards = () =>
     dispatch({ type: ACTION_TYPE.STORE_ERROR_STARSHIPS_CARDS })
     console.log(err)
   })
+
+export const clearStarshipsCards = () => ({
+  type: ACTION_TYPE.CLEAR_STARSHIPS_CARDS
+})
