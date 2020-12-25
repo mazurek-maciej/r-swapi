@@ -10,7 +10,7 @@ import { GameType } from '../store/models/GameType';
 
 import { Container, Grid } from '@material-ui/core';
 
-import SelectGameType from './SelectGameType';
+import SelectGameTypeCard from './SelectGameTypeCard';
 import GameContainer from './GameContainer';
 import Header from './Header';
 
@@ -41,7 +41,15 @@ function App() {
             <GameContainer />
           ) :
           (
-            <SelectGameType handleChooseGame={dispatchSwitchGameType} />
+            <Grid container justify="center" spacing={3}>
+              <Grid item>
+                <SelectGameTypeCard handleChooseGame={dispatchSwitchGameType} gameType={GameType.people} />
+              </Grid>
+
+              <Grid item>
+                <SelectGameTypeCard handleChooseGame={dispatchSwitchGameType} gameType={GameType.starships} />
+              </Grid>
+            </Grid>
           )}
         </Grid>
       </Container>
