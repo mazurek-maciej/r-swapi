@@ -9,7 +9,6 @@ import { ACTION_TYPE as PEOPLE_TYPE } from '../../people/actions/types';
 import { ACTION_TYPE as GAME_ACTION } from '../../game/actions/types';
 
 import firstPerson from '../../../_mocks_/validPersonOneResponse.json'
-import secondPerson from '../../../_mocks_/validPersonTwoResponse.json'
 import { RootState } from '../../state';
 import { AnyAction } from 'redux';
 import { configureStore } from '../..';
