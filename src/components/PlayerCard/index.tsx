@@ -13,7 +13,7 @@ import { People } from "../../store/people/models/People";
 import starshipsImg from '../../assets/images/starships.webp'
 import peopleImg from '../../assets/images/people.jpg'
 
-interface Props {
+export interface PlayerCardProps {
   player: Player;
   avatar: string;
   isWinner: boolean;
@@ -23,7 +23,7 @@ interface Props {
   starship?: Starship;
 }
 
-const PlayerCard = ({ player, avatar, isWinner, status, gameType, people, starship }: Props) => {
+const PlayerCard = ({ player, avatar, isWinner, status, gameType, people, starship }: PlayerCardProps) => {
   const classes = useStyles();
   const cardImage = gameType === GameType.people ? peopleImg : starshipsImg
 
