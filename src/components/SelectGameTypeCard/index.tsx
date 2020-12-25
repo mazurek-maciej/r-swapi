@@ -13,10 +13,12 @@ const SelectGameTypeCard = ({ handleChooseGame, gameType }: Props) => {
   const classes = useStyles();
   const cardImage = gameType === GameType.people ? peopleImg : starshipsImg;
   const cardTitle = gameType === GameType.people ? 'People' : 'Starships';
+
   return (
     <Card
       className={classes.gameTypeCard}
       onClick={() => handleChooseGame(gameType)}
+      data-testid={'game-type-card'}
     >
       <CardMedia
         image={cardImage}
