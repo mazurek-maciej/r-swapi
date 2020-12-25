@@ -18,8 +18,8 @@ const GameContainer = () => {
   const [hasStartedGame, setHasStartedGame] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  const { leftCard: leftPeopleCard, rightCard: rightPeopleCard, error } = useSelector((state: RootState) => state.peopleCards)
-  const { leftCard: leftStarshipCard, rightCard: rightStarshipCard } = useSelector((state: RootState) => state.starshipsCards)
+  const { leftCard: leftPeopleCard, rightCard: rightPeopleCard, error: peopleError } = useSelector((state: RootState) => state.peopleCards)
+  const { leftCard: leftStarshipCard, rightCard: rightStarshipCard, error: starshipsError } = useSelector((state: RootState) => state.starshipsCards)
   const { leftPlayer, rightPlayer, isDraw, winnerId, gameType } = useSelector((state: RootState) => state.game)
   const { peopleStatus, starshipsStatus } = useSelector((state: RootState) => ({ peopleStatus: state.people.status, starshipsStatus: state.starships.status}))
 
@@ -68,6 +68,7 @@ const GameContainer = () => {
       <>
         <Grid item xs={3}>
           <PlayerCard
+            data-testid={'left-starship-card'}
             player={leftPlayer}
             avatar={playerLeftAvatar}
             isWinner={leftPlayer.id === winnerId}
@@ -79,6 +80,7 @@ const GameContainer = () => {
 
         <Grid item xs={3}>
           <PlayerCard
+            data-testid={'right-starship-card'}
             player={rightPlayer}
             avatar={playerRightAvatar}
             isWinner={rightPlayer.id === winnerId}
@@ -110,7 +112,9 @@ const GameContainer = () => {
               size={'large'}
               onClick={handleDispatchGameType}
               endIcon={<CasinoIcon/>}
-            >ROLL</Button>
+            >
+              ROLL
+            </Button>
           </Grid>
 
           <Grid item>
@@ -121,7 +125,10 @@ const GameContainer = () => {
             {isDraw ? <Typography variant="h4">DRAW</Typography> : null}
           </Grid>
           
-          {error ? <Typography variant="subtitle1">{error}</Typography> : null}
+          {peopleError || starshipsError ? 
+            <Typography variant="subtitle1">{peopleError || starshipsError}</Typography>
+            : null
+          }
         </Grid>
       </Grid>
     </>
