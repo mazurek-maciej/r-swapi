@@ -17,7 +17,7 @@ import { configureStore } from '../..';
 type DispatchExts = ThunkDispatch<RootState, void, AnyAction>
 
 const middlewares = [thunk, apiMiddleware];
-const { store: rootStore } = configureStore();
+const rootStore = configureStore();
 const mockStore = configureMockStore<RootState, DispatchExts>(middlewares)
 
 describe('People cards store actions', () => {

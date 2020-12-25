@@ -16,7 +16,7 @@ import { ACTION_TYPE as GAME_TYPE } from "../../game/actions/types";
 type DispatchExts = ThunkDispatch<RootState, void, AnyAction>
 
 const middlewares = [thunk, apiMiddleware];
-const { store: rootStore } = configureStore();
+const rootStore = configureStore();
 const mockStore = configureMockStore<RootState, DispatchExts>(middlewares)
 
 describe('Starships Cards store actions', () => {
