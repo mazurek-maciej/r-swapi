@@ -4,7 +4,7 @@ import { PeopleState } from "../reducers/types";
 import { ACTION_TYPE, GetPeopleActiondMeta, GetPeopleActionPayload, GetPeopleActionSuccessPayload } from "./types";
 
 
-const generateGetPeopleUrl = () => {
+export const generateGetPeopleUrl = () => {
   const min = Math.ceil(1);
   const max = Math.floor(83);
   const randomNr = Math.floor(Math.random() * (max - min + 1)) + min;

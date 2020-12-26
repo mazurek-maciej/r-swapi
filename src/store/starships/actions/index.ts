@@ -26,7 +26,3 @@ export const getStarshipsAction = () =>
       }
     ]
   })
-
-export const clearStarshipCardsAction = () => ({
-  type: ACTION_TYPE.CLEAR_STARSHIPS_CARDS
-})

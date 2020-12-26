@@ -4,7 +4,7 @@ import { ACTION_TYPE, GetPeopleActionFailurePayload, GetPeopleActionPayload, Get
 import { StatusOfAPICall } from "../../game/models/StatusOfApiCall";
 import { PeopleState } from "./types";
 
-const initialState: PeopleState = {
+export const initialState: PeopleState = {
   status: StatusOfAPICall.IDLE,
   data: undefined,
   error: undefined

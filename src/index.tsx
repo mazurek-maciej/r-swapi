@@ -21,7 +21,7 @@ const theme = createMuiTheme({
   }
 })
 
-const { store } = configureStore()
+const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>

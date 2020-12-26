@@ -7,7 +7,7 @@ import { rootReducer } from "./reducer";
 import { RootState } from "./state";
 
 
-export const configureStore = () => {
+export const configureStore = (initialState?: RootState): Store<RootState> => {
   let middleware = applyMiddleware(thunk, apiMiddleware);
 
   if (process.env.NODE_ENV !== 'production') {
@@ -15,7 +15,7 @@ export const configureStore = () => {
     middleware = composeEnhancers(middleware);
   }
 
-  const store = createStore(rootReducer, middleware) as Store<RootState>;
+  const store = createStore(rootReducer, initialState, middleware) as Store<RootState>;
 
-  return { store };
+  return store;
 }

@@ -25,11 +25,5 @@ export const starshipsReducer = handleActions<StarshipsState, GetStarshipsAction
     status: StatusOfAPICall.FAILURE,
     data: undefined,
     error: (action.payload as GetStarshipsActionFailurePayload).detail
-  }),
-  [ACTION_TYPE.CLEAR_STARSHIPS_CARDS]: () => ({
-    status: StatusOfAPICall.IDLE,
-    leftCard: undefined,
-    rightCard: undefined,
-    error: undefined
   })
 }, {...initialState})

@@ -2,7 +2,7 @@ import { handleActions } from "redux-actions";
 import { ACTION_TYPE, StarshipsCardsStoreCardsActionPayload } from "../actions/types";
 import { StarshipsCardsState } from "./types";
 
-const initialState: StarshipsCardsState = {
+export const initialState: StarshipsCardsState = {
   leftCard: undefined,
   rightCard: undefined,
   error: undefined,
@@ -22,5 +22,5 @@ export const starshipsCardsReducer = handleActions<StarshipsCardsState>({
     leftCard: undefined,
     rightCard: undefined,
     error: undefined
-  }),
+  })
 }, {...initialState})

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearePeopleCardsAction } from '../store/peopleCards/actions';
-import { clearStarshipCardsAction } from '../store/starships/actions';
 import { switchGameType } from '../store/game/actions';
+import { clearPeopleCardsAction } from '../store/peopleCards/actions';
+import { clearStarshipsCards } from '../store/starshipsCards/actions';
 import { useStyles } from '../services/styles';
 
 import { RootState } from '../store/state';
@@ -10,7 +10,7 @@ import { GameType } from '../store/models/GameType';
 
 import { Container, Grid } from '@material-ui/core';
 
-import SelectGameType from './SelectGameType';
+import SelectGameTypeCard from './SelectGameTypeCard';
 import GameContainer from './GameContainer';
 import Header from './Header';
 
@@ -21,16 +21,14 @@ function App() {
   const { gameType, userSelectedGameType } = useSelector((state: RootState) => state.game)
 
   const dispatchSwitchGameType = (type: GameType) => dispatch(switchGameType(type));
-  const dispatchClearPeopleCards = () => dispatch(clearePeopleCardsAction());
-  const dispatchClearStarshipCards = () => dispatch(clearStarshipCardsAction());
 
   const handleSwitchGameType = () => {
     if (gameType === GameType.people) {
-      dispatchSwitchGameType(GameType.starships)
-      return dispatchClearStarshipCards()
+      dispatch(clearStarshipsCards())
+      return dispatchSwitchGameType(GameType.starships)
     }
-    dispatchSwitchGameType(GameType.people)
-    return dispatchClearPeopleCards()
+    dispatch(clearPeopleCardsAction())
+    return dispatchSwitchGameType(GameType.people)
   }
 
   return (
@@ -43,7 +41,15 @@ function App() {
             <GameContainer />
           ) :
           (
-            <SelectGameType handleChooseGame={dispatchSwitchGameType} />
+            <Grid container justify="center" spacing={3}>
+              <Grid item>
+                <SelectGameTypeCard handleChooseGame={dispatchSwitchGameType} gameType={GameType.people} />
+              </Grid>
+
+              <Grid item>
+                <SelectGameTypeCard handleChooseGame={dispatchSwitchGameType} gameType={GameType.starships} />
+              </Grid>
+            </Grid>
           )}
         </Grid>
       </Container>
