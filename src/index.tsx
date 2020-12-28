@@ -8,31 +8,30 @@ import App from './components/App';
 
 import { CssBaseline, ThemeProvider, createMuiTheme } from '@material-ui/core';
 
-
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#000000'
+      main: '#000000',
     },
     secondary: {
-      main: '#ffb74d'
-    }
-  }
-})
+      main: '#ffb74d',
+    },
+  },
+});
 
-const store = configureStore()
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <CssBaseline/>
+        <CssBaseline />
         <App />
-      </ThemeProvider>  
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

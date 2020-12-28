@@ -18,36 +18,45 @@ function App() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const { gameType, userSelectedGameType } = useSelector((state: RootState) => state.game)
+  const { gameType, userSelectedGameType } = useSelector(
+    (state: RootState) => state.game,
+  );
 
   const dispatchSwitchGameType = (type: GameType) => dispatch(switchGameType(type));
 
   const handleSwitchGameType = () => {
     if (gameType === GameType.people) {
-      dispatch(clearStarshipsCardsAction())
-      return dispatchSwitchGameType(GameType.starships)
+      dispatch(clearStarshipsCardsAction());
+      return dispatchSwitchGameType(GameType.starships);
     }
-    dispatch(clearPeopleCardsAction())
-    return dispatchSwitchGameType(GameType.people)
-  }
+    dispatch(clearPeopleCardsAction());
+    return dispatchSwitchGameType(GameType.people);
+  };
 
   return (
     <>
-      <Header userSelectedGameType={userSelectedGameType} handleOnClick={handleSwitchGameType} />
+      <Header
+        userSelectedGameType={userSelectedGameType}
+        handleOnClick={handleSwitchGameType}
+      />
       <Container maxWidth="lg" component="main" className={classes.mainContainer}>
         <Grid container justify="center" spacing={3}>
-          {userSelectedGameType ?
-          (
+          {userSelectedGameType ? (
             <GameContainer />
-          ) :
-          (
+          ) : (
             <Grid container justify="center" spacing={3}>
               <Grid item>
-                <SelectGameTypeCard handleChooseGame={dispatchSwitchGameType} gameType={GameType.people} />
+                <SelectGameTypeCard
+                  handleChooseGame={dispatchSwitchGameType}
+                  gameType={GameType.people}
+                />
               </Grid>
 
               <Grid item>
-                <SelectGameTypeCard handleChooseGame={dispatchSwitchGameType} gameType={GameType.starships} />
+                <SelectGameTypeCard
+                  handleChooseGame={dispatchSwitchGameType}
+                  gameType={GameType.starships}
+                />
               </Grid>
             </Grid>
           )}
