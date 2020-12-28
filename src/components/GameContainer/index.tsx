@@ -41,7 +41,7 @@ const GameContainer = () => {
   const renderPeopleCards = () => {
     return gameType === GameType.people ? (
       <>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={9}>
           <PlayerCard
             player={leftPlayer}
             avatar={playerLeftAvatar}
@@ -52,7 +52,7 @@ const GameContainer = () => {
           />
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item md={3} xs={9}>
         <PlayerCard
             player={rightPlayer}
             avatar={playerRightAvatar}
@@ -69,7 +69,7 @@ const GameContainer = () => {
   const renderStarshipCards = () => {
     return gameType === GameType.starships ? (
       <>
-        <Grid item xs={3}>
+        <Grid item md={3} xs={9}>
           <PlayerCard
             data-testid={'left-starship-card'}
             player={leftPlayer}
@@ -81,7 +81,7 @@ const GameContainer = () => {
           />
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item md={3} xs={9}>
           <PlayerCard
             data-testid={'right-starship-card'}
             player={rightPlayer}
@@ -117,7 +117,7 @@ const GameContainer = () => {
               endIcon={isDataFetching ? <CircularProgress size={'small'} /> : <CasinoIcon/>}
               disabled={isDataFetching}
             >
-              ROLL
+              ROLL {gameType}
             </Button>
           </Grid>
 
