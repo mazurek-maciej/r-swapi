@@ -11,9 +11,10 @@ const store = configureStore();
 describe('Game container', () => {
   it('should render roll button', () => {
     renderWithRedux(<GameContainer />)
-    const rollBtn = 'ROLL'
+    const gameType = store.getState().game.gameType;
+    const rollBtn = screen.getByText(`ROLL ${gameType}`)
     
-    expect(screen.getByText(rollBtn)).toBeInTheDocument()
+    expect(rollBtn).toBeInTheDocument()
   })
 
   it('should not render draw text when there is no draw', () => {
@@ -31,7 +32,8 @@ describe('Game container', () => {
 
   it('should not render message with information to start the game after click roll button', async () => {
     renderWithRedux(<GameContainer />)
-    const rollButton = screen.getByText('ROLL').parentElement!
+    const gameType = store.getState().game.gameType;
+    const rollButton = screen.getByText(`ROLL ${gameType}`).parentElement!
 
     userEvent.click(rollButton)
     const message = screen.queryByText('To start the game press roll button');
@@ -111,7 +113,8 @@ describe('Game container', () => {
     })
 
     renderWithRedux(<GameContainer />, { store: mockStore });
-    const rollBtn = screen.getByText('ROLL').parentElement;
+    const gameType = store.getState().game.gameType;
+    const rollBtn = screen.getByText(`ROLL ${gameType}`).parentElement;
 
     expect(rollBtn).toBeDisabled();
   })
