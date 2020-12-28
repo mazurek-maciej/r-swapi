@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { switchGameType } from '../store/game/actions';
 import { clearPeopleCardsAction } from '../store/peopleCards/actions';
-import { clearStarshipsCards } from '../store/starshipsCards/actions';
+import { clearStarshipsCardsAction } from '../store/starshipsCards/actions';
 import { useStyles } from '../services/styles';
 
 import { RootState } from '../store/state';
@@ -24,7 +24,7 @@ function App() {
 
   const handleSwitchGameType = () => {
     if (gameType === GameType.people) {
-      dispatch(clearStarshipsCards())
+      dispatch(clearStarshipsCardsAction())
       return dispatchSwitchGameType(GameType.starships)
     }
     dispatch(clearPeopleCardsAction())

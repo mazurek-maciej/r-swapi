@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { storePeopleCardsAction } from "../../store/peopleCards/actions"
-import { storeStarshipsCards } from "../../store/starshipsCards/actions"
+import { storeStarshipsCardsAction } from "../../store/starshipsCards/actions"
 
 import { GameType } from "../../store/models/GameType"
 import { RootState } from "../../store/state"
@@ -27,7 +27,7 @@ const GameContainer = () => {
   const isDataFetching = peopleStatus === StatusOfAPICall.FETCHING || starshipsStatus === StatusOfAPICall.FETCHING;
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
-  const dispatchGetStarship = () => dispatch(storeStarshipsCards());
+  const dispatchGetStarship = () => dispatch(storeStarshipsCardsAction());
 
   const handleDispatchGameType = () => {
     !hasStartedGame && setHasStartedGame(true);
