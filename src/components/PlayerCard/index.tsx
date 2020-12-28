@@ -28,8 +28,7 @@ export interface PlayerCardProps {
   isWinner: boolean;
   status: StatusOfAPICall;
   gameType: GameType;
-  people?: People;
-  starship?: Starship;
+  cards?: People | Starship;
 }
 
 const PlayerCard = ({
@@ -38,31 +37,27 @@ const PlayerCard = ({
   isWinner,
   status,
   gameType,
-  people,
-  starship,
+  cards
 }: PlayerCardProps) => {
   const classes = useStyles();
   const cardImage = gameType === GameType.people ? peopleImg : starshipsImg;
 
-  const renderCardContent = () => {
-    return gameType === GameType.people ? (
-      people ? (
-        <>
-          <Typography variant="h5">{people.name}</Typography>
-          <Typography variant="h4">Mass: {people.mass}</Typography>
-        </>
+  const renderCardDescription = () => (
+    <>
+      <Typography variant="h5">{cards?.name}</Typography>
+      {gameType === GameType.people ? (
+        <Typography variant="h4">Mass: {(cards as People).mass}</Typography>
       ) : (
-        <Typography>Cannot recieve information from space command</Typography>
-      )
-    ) : starship ? (
-      <>
-        <Typography variant="h5">{starship?.name}</Typography>
-        <Typography variant="h4">Crew: {starship?.crew}</Typography>
-      </>
-    ) : (
-      <Typography>Cannot recieve information from space command</Typography>
-    );
-  };
+        <Typography variant="h4">Crew: {(cards as Starship).crew}</Typography>
+      )}
+    </>
+  )
+
+  const renderCardContent = () => (
+    cards
+      ? renderCardDescription()
+      : <Typography>Cannot recieve information from space command</Typography>
+  );
 
   return (
     <Card className={isWinner ? classes.winCard : ''}>

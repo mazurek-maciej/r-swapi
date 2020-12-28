@@ -62,7 +62,7 @@ const GameContainer = () => {
             isWinner={leftPlayer.id === winnerId}
             gameType={gameType}
             status={peopleStatus}
-            people={leftPeopleCard}
+            cards={leftPeopleCard}
           />
         </Grid>
 
@@ -73,7 +73,7 @@ const GameContainer = () => {
             isWinner={rightPlayer.id === winnerId}
             gameType={gameType}
             status={peopleStatus}
-            people={rightPeopleCard}
+            cards={rightPeopleCard}
           />
         </Grid>
       </>
@@ -91,7 +91,7 @@ const GameContainer = () => {
             isWinner={leftPlayer.id === winnerId}
             gameType={gameType}
             status={starshipsStatus}
-            starship={leftStarshipCard}
+            cards={leftStarshipCard}
           />
         </Grid>
 
@@ -103,7 +103,7 @@ const GameContainer = () => {
             isWinner={rightPlayer.id === winnerId}
             gameType={gameType}
             status={starshipsStatus}
-            starship={rightStarshipCard}
+            cards={rightStarshipCard}
           />
         </Grid>
       </>
