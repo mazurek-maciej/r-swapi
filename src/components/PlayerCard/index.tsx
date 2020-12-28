@@ -37,7 +37,7 @@ const PlayerCard = ({
   isWinner,
   status,
   gameType,
-  cards
+  cards,
 }: PlayerCardProps) => {
   const classes = useStyles();
   const cardImage = gameType === GameType.people ? peopleImg : starshipsImg;
@@ -51,13 +51,14 @@ const PlayerCard = ({
         <Typography variant="h4">Crew: {(cards as Starship).crew}</Typography>
       )}
     </>
-  )
-
-  const renderCardContent = () => (
-    cards
-      ? renderCardDescription()
-      : <Typography>Cannot recieve information from space command</Typography>
   );
+
+  const renderCardContent = () =>
+    cards ? (
+      renderCardDescription()
+    ) : (
+      <Typography>Cannot recieve information from space command</Typography>
+    );
 
   return (
     <Card className={isWinner ? classes.winCard : ''}>
