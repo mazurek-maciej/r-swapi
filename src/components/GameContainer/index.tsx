@@ -5,9 +5,10 @@ import { storeStarshipsCards } from "../../store/starshipsCards/actions"
 
 import { GameType } from "../../store/models/GameType"
 import { RootState } from "../../store/state"
+import { StatusOfAPICall } from "../../store/game/models/StatusOfApiCall"
 
 import PlayerCard from "../PlayerCard"
-import { Button, Grid, Typography } from "@material-ui/core"
+import { Button, CircularProgress, Grid, Typography } from "@material-ui/core"
 import CasinoIcon from '@material-ui/icons/Casino';
 
 import playerLeftAvatar from '../../assets/images/playerOneAvatar.png';
@@ -22,6 +23,8 @@ const GameContainer = () => {
   const { leftCard: leftStarshipCard, rightCard: rightStarshipCard, error: starshipsError } = useSelector((state: RootState) => state.starshipsCards)
   const { leftPlayer, rightPlayer, isDraw, winnerId, gameType } = useSelector((state: RootState) => state.game)
   const { peopleStatus, starshipsStatus } = useSelector((state: RootState) => ({ peopleStatus: state.people.status, starshipsStatus: state.starships.status}))
+
+  const isDataFetching = peopleStatus === StatusOfAPICall.FETCHING || starshipsStatus === StatusOfAPICall.FETCHING;
 
   const dispatchGetPeople = () => dispatch(storePeopleCardsAction());
   const dispatchGetStarship = () => dispatch(storeStarshipsCards());
@@ -111,7 +114,8 @@ const GameContainer = () => {
               variant={'outlined'}
               size={'large'}
               onClick={handleDispatchGameType}
-              endIcon={<CasinoIcon/>}
+              endIcon={isDataFetching ? <CircularProgress size={'small'} /> : <CasinoIcon/>}
+              disabled={isDataFetching}
             >
               ROLL
             </Button>
