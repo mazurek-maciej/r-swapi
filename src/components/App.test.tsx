@@ -1,5 +1,5 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { renderWithRedux } from '../services/renderWithRedux';
+import { renderWithRedux } from '../helpers/renderWithRedux';
 import { configureStore } from '../store';
 
 import App from './App';

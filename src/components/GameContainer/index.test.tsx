@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
-import { renderWithRedux } from '../../services/renderWithRedux';
+import { renderWithRedux } from '../../helpers/renderWithRedux';
 import GameContainer from '.';
 import { configureStore } from '../../store';
 import userEvent from '@testing-library/user-event';
