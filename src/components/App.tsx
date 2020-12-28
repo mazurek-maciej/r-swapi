@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Header gameType={gameType} userSelectedGameType={userSelectedGameType} handleOnClick={handleSwitchGameType} />
+      <Header userSelectedGameType={userSelectedGameType} handleOnClick={handleSwitchGameType} />
       <Container maxWidth="lg" component="main" className={classes.mainContainer}>
         <Grid container justify="center" spacing={3}>
           {userSelectedGameType ?
