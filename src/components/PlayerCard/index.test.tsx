@@ -40,8 +40,8 @@ describe('Player Card component', () => {
     expect(noDataMessage).toBeInTheDocument();
   });
 
-  it('should render current card name and mass', () => {
-    render(<PlayerCard {...props} people={validPeople} />);
+  it('should render card info base on passed card type', () => {
+    render(<PlayerCard {...props} cards={validPeople} />);
     const cardName = screen.getByText(validPeople.name);
     const cardMass = validPeople.mass;
     const massText = screen.getByText(`Mass: ${cardMass}`);
@@ -51,7 +51,7 @@ describe('Player Card component', () => {
   });
 
   it('should render winner label when user has isWinner state true', () => {
-    render(<PlayerCard {...props} people={validPeople} isWinner={true} />);
+    render(<PlayerCard {...props} cards={validPeople} isWinner={true} />);
     const winnerText = screen.getByText(/winner/i);
 
     expect(winnerText).toBeInTheDocument();
