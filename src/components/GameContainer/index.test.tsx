@@ -3,6 +3,8 @@ import { renderWithRedux } from "../../services/renderWithRedux"
 import GameContainer from "."
 import { configureStore } from "../../store";
 import userEvent from "@testing-library/user-event";
+import { StatusOfAPICall } from "../../store/game/models/StatusOfApiCall";
+import { GameType } from "../../store/models/GameType";
 
 const store = configureStore();
 
@@ -81,13 +83,37 @@ describe('Game container', () => {
     expect(screen.getByText(error)).toBeInTheDocument()
   })
 
-  it('should render two progress circles after click roll button', async () => {
-    renderWithRedux(<GameContainer />);
-    const rollButton = screen.getByText('ROLL').parentElement!
+  it('should render three progress circles when data is fetching', async () => {
+    const mockStore = configureStore({
+      ...store.getState(),
+      game: {
+        ...store.getState().game,
+        gameType: GameType.people
+      },
+      people: {
+        status: StatusOfAPICall.FETCHING
+      }
+    })
 
-    userEvent.click(rollButton)
+    renderWithRedux(<GameContainer />, { store: mockStore });
+    const indicators = screen.queryAllByRole('progressbar');
+    
+    expect(indicators).toHaveLength(3)
+  })
 
-    await waitFor(() => expect(screen.getAllByRole('progressbar')).toHaveLength(2))
+  it('should render disabled button when data is fetching', () => {
+    const mockStore = configureStore({
+      ...store.getState(),
+      people: {
+        ...store.getState().people,
+        status: StatusOfAPICall.FETCHING
+      }
+    })
+
+    renderWithRedux(<GameContainer />, { store: mockStore });
+    const rollBtn = screen.getByText('ROLL').parentElement;
+
+    expect(rollBtn).toBeDisabled();
   })
   
 })
