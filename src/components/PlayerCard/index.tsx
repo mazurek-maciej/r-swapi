@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStyles } from '../../services/styles';
+import { useStyles } from '../../assets/styles/styles';
 
 import {
   Avatar,

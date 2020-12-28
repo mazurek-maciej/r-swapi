@@ -1,7 +1,7 @@
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import starshipsImg from '../../assets/images/starships.webp';
 import peopleImg from '../../assets/images/people.jpg';
-import { useStyles } from '../../services/styles';
+import { useStyles } from '../../assets/styles/styles';
 import { GameType } from '../../store/models/GameType';
 
 interface Props {

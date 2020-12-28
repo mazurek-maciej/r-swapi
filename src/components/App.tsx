@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { switchGameType } from '../store/game/actions';
 import { clearPeopleCardsAction } from '../store/peopleCards/actions';
 import { clearStarshipsCardsAction } from '../store/starshipsCards/actions';
-import { useStyles } from '../services/styles';
+import { useStyles } from '../assets/styles/styles';
 
 import { RootState } from '../store/state';
 import { GameType } from '../store/models/GameType';
