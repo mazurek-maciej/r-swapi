@@ -52,63 +52,31 @@ const GameContainer = () => {
     return dispatchGetStarship();
   };
 
-  const renderPeopleCards = () => {
-    return gameType === GameType.people ? (
-      <>
-        <Grid item md={3} xs={9}>
-          <PlayerCard
-            player={leftPlayer}
-            avatar={playerLeftAvatar}
-            isWinner={leftPlayer.id === winnerId}
-            gameType={gameType}
-            status={peopleStatus}
-            cards={leftPeopleCard}
-          />
-        </Grid>
+  const renderCards = () => (
+    <>
+      <Grid item md={3} xs={9}>
+        <PlayerCard
+          player={leftPlayer}
+          avatar={playerLeftAvatar}
+          isWinner={leftPlayer.id === winnerId}
+          gameType={gameType}
+          status={gameType === GameType.people ? peopleStatus : starshipsStatus}
+          cards={gameType === GameType.people ? leftPeopleCard : leftStarshipCard}
+        />
+      </Grid>
 
-        <Grid item md={3} xs={9}>
-          <PlayerCard
-            player={rightPlayer}
-            avatar={playerRightAvatar}
-            isWinner={rightPlayer.id === winnerId}
-            gameType={gameType}
-            status={peopleStatus}
-            cards={rightPeopleCard}
-          />
-        </Grid>
-      </>
-    ) : null;
-  };
-
-  const renderStarshipCards = () => {
-    return gameType === GameType.starships ? (
-      <>
-        <Grid item md={3} xs={9}>
-          <PlayerCard
-            data-testid={'left-starship-card'}
-            player={leftPlayer}
-            avatar={playerLeftAvatar}
-            isWinner={leftPlayer.id === winnerId}
-            gameType={gameType}
-            status={starshipsStatus}
-            cards={leftStarshipCard}
-          />
-        </Grid>
-
-        <Grid item md={3} xs={9}>
-          <PlayerCard
-            data-testid={'right-starship-card'}
-            player={rightPlayer}
-            avatar={playerRightAvatar}
-            isWinner={rightPlayer.id === winnerId}
-            gameType={gameType}
-            status={starshipsStatus}
-            cards={rightStarshipCard}
-          />
-        </Grid>
-      </>
-    ) : null;
-  };
+      <Grid item md={3} xs={9}>
+        <PlayerCard
+          player={rightPlayer}
+          avatar={playerRightAvatar}
+          isWinner={rightPlayer.id === winnerId}
+          gameType={gameType}
+          status={gameType === GameType.people ? peopleStatus : starshipsStatus}
+          cards={gameType === GameType.people ? rightPeopleCard : rightStarshipCard}
+        />
+      </Grid>
+    </>
+  )
 
   const renderStartGameInfo = () =>
     hasStartedGame ? null : (
@@ -120,8 +88,7 @@ const GameContainer = () => {
   return (
     <>
       <Grid container justify="center" spacing={3}>
-        {renderPeopleCards()}
-        {renderStarshipCards()}
+        {renderCards()}
       </Grid>
 
       <Grid item xs>
