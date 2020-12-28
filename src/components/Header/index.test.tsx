@@ -7,6 +7,10 @@ describe('Header component', () => {
   const userSelectedGameType = false;
   const handleOnClick = jest.fn();
 
+  it('should render correctly', () => {
+    render(<Header userSelectedGameType={userSelectedGameType} handleOnClick={handleOnClick} />)
+  })
+
   it('should render header element', () => {
     render(<Header userSelectedGameType={userSelectedGameType} handleOnClick={handleOnClick} />)
     const title = screen.getByText('gwizdek');

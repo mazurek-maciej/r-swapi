@@ -9,6 +9,10 @@ import { GameType } from "../../store/models/GameType";
 const store = configureStore();
 
 describe('Game container', () => {
+  it('should render correctly', () => {
+    renderWithRedux(<GameContainer />)
+  })
+
   it('should render roll button', () => {
     renderWithRedux(<GameContainer />)
     const gameType = store.getState().game.gameType;

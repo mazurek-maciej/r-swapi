@@ -21,6 +21,10 @@ describe('Player Card component', () => {
     gameType: GameType.people,
   }
 
+  it('should render correctly', () => {
+    render(<PlayerCard {...props} />)
+  })
+
   it('should render player card with information base on initial state', () => {
     render(<PlayerCard {...props} />)
     const playerName = screen.getByText(store.getState().game.leftPlayer.name);

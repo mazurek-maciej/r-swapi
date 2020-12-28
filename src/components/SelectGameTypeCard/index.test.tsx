@@ -6,6 +6,10 @@ import { GameType } from "../../store/models/GameType";
 describe('SelectGameTypeCard component', () => {
   const handleChooseGame = jest.fn();
 
+  it('should render correctly', () => {
+    render(<SelectGameTypeCard handleChooseGame={handleChooseGame} gameType={GameType.people} />)
+  })
+
   it('should render people card when game type is set to people', () => {
     render(<SelectGameTypeCard handleChooseGame={handleChooseGame} gameType={GameType.people} />)
     const peopleCardTitle = screen.queryByText(/people/i);
