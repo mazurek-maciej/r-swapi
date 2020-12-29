@@ -13,7 +13,7 @@ interface Props {
 export const Header = ({ userSelectedGameType, handleOnClick }: Props) => {
   const classes = useStyles();
 
-  const renderChooseCardsType = () => {
+  const renderSwitchCardsButton = () => {
     return userSelectedGameType ? (
       <Button
         variant={'outlined'}
@@ -38,9 +38,9 @@ export const Header = ({ userSelectedGameType, handleOnClick }: Props) => {
           component="h1"
           className={classes.headerTitle}>
           <Avatar src={whistleIcon} />
-          gwizdek
+          Gwizdek
         </Typography>
-        {renderChooseCardsType()}
+        {renderSwitchCardsButton()}
       </Toolbar>
     </AppBar>
   );

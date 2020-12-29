@@ -52,7 +52,7 @@ const GameContainer = () => {
     return dispatchGetStarship();
   };
 
-  const renderCards = () => (
+  const renderPlayerCards = () => (
     <>
       <Grid item md={3} xs={9}>
         <PlayerCard
@@ -88,7 +88,7 @@ const GameContainer = () => {
   return (
     <>
       <Grid container justify="center" spacing={3}>
-        {renderCards()}
+        {renderPlayerCards()}
       </Grid>
 
       <Grid item xs>
