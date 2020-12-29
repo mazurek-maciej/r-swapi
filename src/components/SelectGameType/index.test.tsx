@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SelectGameTypeCard from '.';
+import SelectGameType from '.';
 import { GameType } from '../../store/models/GameType';
 
-describe('SelectGameTypeCard component', () => {
+describe('SelectGameType component', () => {
   const handleChooseGame = jest.fn();
 
   it('should render correctly', () => {
     render(
-      <SelectGameTypeCard
+      <SelectGameType
         handleChooseGame={handleChooseGame}
         gameType={GameType.people}
       />,
@@ -17,7 +17,7 @@ describe('SelectGameTypeCard component', () => {
 
   it('should render people card when game type is set to people', () => {
     render(
-      <SelectGameTypeCard
+      <SelectGameType
         handleChooseGame={handleChooseGame}
         gameType={GameType.people}
       />,
@@ -31,7 +31,7 @@ describe('SelectGameTypeCard component', () => {
 
   it('should render starships card when game type is set to starships', () => {
     render(
-      <SelectGameTypeCard
+      <SelectGameType
         handleChooseGame={handleChooseGame}
         gameType={GameType.starships}
       />,
@@ -45,7 +45,7 @@ describe('SelectGameTypeCard component', () => {
 
   it('should be able to call handleChooseGame after click on card', () => {
     render(
-      <SelectGameTypeCard
+      <SelectGameType
         handleChooseGame={handleChooseGame}
         gameType={GameType.starships}
       />,

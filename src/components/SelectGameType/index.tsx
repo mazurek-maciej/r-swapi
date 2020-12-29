@@ -9,7 +9,7 @@ interface Props {
   gameType: GameType;
 }
 
-const SelectGameTypeCard = ({ handleChooseGame, gameType }: Props) => {
+const SelectGameType = ({ handleChooseGame, gameType }: Props) => {
   const classes = useStyles();
   const cardImage = gameType === GameType.people ? peopleImg : starshipsImg;
   const cardTitle = gameType === GameType.people ? 'People' : 'Starships';
@@ -29,4 +29,4 @@ const SelectGameTypeCard = ({ handleChooseGame, gameType }: Props) => {
   );
 };
 
-export default SelectGameTypeCard;
+export default SelectGameType;

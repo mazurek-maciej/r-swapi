@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderWithRedux } from '../helpers/renderWithRedux';
 import { configureStore } from '../store';
 
